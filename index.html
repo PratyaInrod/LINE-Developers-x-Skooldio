@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
   <title>My LIFF app</title>
   <link rel="stylesheet" href="css/style.css" media="all">
 </head>
+
 <body>
   <p id="os"><b>OS:</b> </p>
   <p id="language"><b>Language:</b> </p>
@@ -72,11 +74,17 @@
     }
 
     async function getUserProfile() {
-      const profile = await liff.getProfile()
-      document.getElementById("pictureUrl").src = profile.pictureUrl
-      document.getElementById("userId").append(profile.userId)
-      document.getElementById("statusMessage").append(profile.statusMessage)
-      document.getElementById("displayName").append(profile.displayName)
+      try {
+        const profile = await liff.getProfile()
+        console.log("Profile:", profile)
+        document.getElementById("pictureUrl").src = profile.pictureUrl
+        document.getElementById("userId").textContent = profile.userId
+        document.getElementById("statusMessage").textContent = profile.statusMessage
+        document.getElementById("displayName").textContent = profile.displayName
+      } catch (err) {
+        console.error("getUserProfile error:", err)
+        alert("ดึงข้อมูลผู้ใช้ไม่สำเร็จ")
+      }
 
 
     }
@@ -88,11 +96,11 @@
       document.getElementById("accessToken").append(liff.getAccessToken())
       document.getElementById("isInClient").append(liff.isInClient())
       if (liff.isInClient()) {
-        document.getElementById("btnLogOut").style.display="none"
-      }else{
-        document.getElementById("btnMsg").style.display="none"
-        document.getElementById("btnScanCode").style.display="none"
-        document.getElementById("btnClose").style.display="none"
+        document.getElementById("btnLogOut").style.display = "none"
+      } else {
+        document.getElementById("btnMsg").style.display = "none"
+        document.getElementById("btnScanCode").style.display = "none"
+        document.getElementById("btnClose").style.display = "none"
       }
     }
 
@@ -107,4 +115,5 @@
     main()
   </script>
 </body>
+
 </html>
