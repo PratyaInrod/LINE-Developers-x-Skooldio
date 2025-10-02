@@ -109,6 +109,13 @@
 
     async function main() {
       await liff.init({ liffId: "2008199317-oRLk8Mvn" })
+      if (!liff.isLoggedIn()) {
+        liff.login({
+          scope: "profile openid email", // ต้องระบุ openid เพื่อให้ได้ ID Token
+          redirectUri: location.href
+        });
+        return;
+      }
       getEnvironment()
       getUserProfile()
       // getContext()
