@@ -82,8 +82,13 @@
         document.getElementById("statusMessage").textContent = profile.statusMessage
         document.getElementById("displayName").textContent = profile.displayName
         const idToken = liff.getDecodedIDToken();
-        alert(idToken)
-        console.log(idToken);
+        alert("Decoded ID Token:", idToken);
+
+        if (idToken && idToken.email) {
+          document.getElementById("decodedIDToken").textContent = idToken.email;
+        } else {
+          document.getElementById("decodedIDToken").textContent = "No email or not authorized";
+        }
       } catch (err) {
         console.error("getUserProfile error:", err)
         alert("ดึงข้อมูลผู้ใช้ไม่สำเร็จ")
@@ -111,7 +116,7 @@
       await liff.init({ liffId: "2008199317-oRLk8Mvn" })
       if (!liff.isLoggedIn()) {
         liff.login({
-          scope: "profile openid email", // ต้องระบุ openid เพื่อให้ได้ ID Token
+          scope: "profile openid email", // ตรงกับ permission PROFILE + OPENID_CONNECT + OC_EMAIL
           redirectUri: location.href
         });
         return;
