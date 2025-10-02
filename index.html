@@ -76,13 +76,14 @@
     async function getUserProfile() {
       try {
         const profile = await liff.getProfile()
-        const email = await liff.getDecodedIDToken().email 
         console.log("Profile:", profile)
         document.getElementById("pictureUrl").src = profile.pictureUrl
         document.getElementById("userId").textContent = profile.userId
         document.getElementById("statusMessage").textContent = profile.statusMessage
         document.getElementById("displayName").textContent = profile.displayName
-        document.getElementById("decodedIDToken").textContent =email
+        const idToken = liff.getIDToken()
+        const decoded = parseJwt(idToken)
+        document.getElementById("decodedIDToken").textContent = decoded.email || "No email"
       } catch (err) {
         console.error("getUserProfile error:", err)
         alert("ดึงข้อมูลผู้ใช้ไม่สำเร็จ")
