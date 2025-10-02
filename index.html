@@ -81,7 +81,7 @@
         document.getElementById("userId").textContent = profile.userId
         document.getElementById("statusMessage").textContent = profile.statusMessage
         document.getElementById("displayName").textContent = profile.displayName
-        document.getElementById("decodedIDToken").append(liff.getDecodedIDToken().email)
+        document.getElementById("decodedIDToken").textContent =profile.decodedIDToken.email
       } catch (err) {
         console.error("getUserProfile error:", err)
         alert("ดึงข้อมูลผู้ใช้ไม่สำเร็จ")
