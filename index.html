@@ -80,8 +80,15 @@
       document.getElementById("statusMessage").textContent = profile.statusMessage
       document.getElementById("displayName").textContent = profile.displayName
       // document.getElementById("decodedIDToken").append(liff.getDecodedIDToken().email)
-      const idToken = liff.getDecodedIDToken()
-      alert(idToken.email)
+      try {
+        const idToken = liff.getDecodedIDToken()
+        alert(idToken.email)
+      } catch (error) {
+        alert(error)
+        
+      }
+      // const idToken = liff.getDecodedIDToken()
+      // alert(idToken.email)
     }
 
     function getEnvironment() {
