@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
   <title>My LIFF app</title>
   <link rel="stylesheet" href="css/style.css" media="all">
 </head>
-
 <body>
   <p id="os"><b>OS:</b> </p>
   <p id="language"><b>Language:</b> </p>
@@ -44,7 +42,7 @@
     console.log("Hello World!")
   </script> -->
 
-  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <!-- <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script> -->
   <script>
     function createUniversalLink() {
     }
@@ -74,75 +72,21 @@
     }
 
     async function getUserProfile() {
-      // try {
-      //   const profile = await liff.getProfile()
-      //   console.log("Profile:", profile)
-      //   document.getElementById("pictureUrl").src = profile.pictureUrl
-      //   document.getElementById("userId").textContent = profile.userId
-      //   document.getElementById("statusMessage").textContent = profile.statusMessage
-      //   document.getElementById("displayName").textContent = profile.displayName
-      //   document.getElementById("decodedIDToken").append(liff.getDecodedIDToken().email)
-
-      //   if (idToken && idToken.email) {
-      //     document.getElementById("decodedIDToken").textContent = idToken.email;
-      //   } else {
-      //     document.getElementById("decodedIDToken").textContent = "No email or not authorized";
-      //   }
-      // } catch (err) {
-      //   console.error("getUserProfile error:", err)
-      //   alert("ดึงข้อมูลผู้ใช้ไม่สำเร็จ")
-      // }
-
-      const profile = await liff.getProfile()
-      document.getElementById("pictureUrl").src = profile.pictureUrl
-      document.getElementById("userId").append(profile.userId)
-      document.getElementById("statusMessage").append(profile.statusMessage)
-      document.getElementById("displayName").append(profile.displayName)
-      document.getElementById("decodedIDToken").append(liff.getDecodedIDToken().email)
-
-
     }
 
     function getEnvironment() {
-      document.getElementById("os").append(liff.getOS())
-      document.getElementById("language").append(liff.getLanguage())
-      document.getElementById("version").append(liff.getVersion())
-      document.getElementById("accessToken").append(liff.getAccessToken())
-      document.getElementById("isInClient").append(liff.isInClient())
-      if (liff.isInClient()) {
-        document.getElementById("btnLogOut").style.display = "none"
-      } else {
-        document.getElementById("btnMsg").style.display = "none"
-        document.getElementById("btnScanCode").style.display = "none"
-        document.getElementById("btnClose").style.display = "none"
-      }
     }
 
     async function main() {
-      // await liff.init({ liffId: "2008199317-oRLk8Mvn" })
+      alert("LINE Developers x Skooldio")
+      await liff.init({ liffId: "YOUR-LIFF-ID" })
       // getEnvironment()
       // getUserProfile()
-      // // getContext()
-      // // getFriendship()
-      // // createUniversalLink()
-    
-
-    liff.ready.then(() => {
-        document.getElementById("isLoggedIn").append(liff.isLoggedIn())
-        if (liff.isLoggedIn()) {
-          getEnvironment()
-          getUserProfile()
-          // getContext()
-          // getFriendship()
-          // createUniversalLink()
-        } else {
-          liff.login()
-        }
-      })
-      await liff.init({ liffId: "2008199317-oRLk8Mvn" })
+      // getContext()
+      // getFriendship()
+      // createUniversalLink()
     }
     main()
   </script>
 </body>
-
 </html>
