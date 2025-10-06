@@ -81,8 +81,7 @@
         document.getElementById("userId").textContent = profile.userId
         document.getElementById("statusMessage").textContent = profile.statusMessage
         document.getElementById("displayName").textContent = profile.displayName
-        const idToken = liff.getDecodedIDToken();
-        alert("Decoded ID Token:", idToken);
+        document.getElementById("decodedIDToken").append(liff.getDecodedIDToken().email)
 
         if (idToken && idToken.email) {
           document.getElementById("decodedIDToken").textContent = idToken.email;
@@ -113,19 +112,27 @@
     }
 
     async function main() {
+      // await liff.init({ liffId: "2008199317-oRLk8Mvn" })
+      // getEnvironment()
+      // getUserProfile()
+      // // getContext()
+      // // getFriendship()
+      // // createUniversalLink()
+    
+
+    liff.ready.then(() => {
+        document.getElementById("isLoggedIn").append(liff.isLoggedIn())
+        if (liff.isLoggedIn()) {
+          getEnvironment()
+          getUserProfile()
+          // getContext()
+          // getFriendship()
+          // createUniversalLink()
+        } else {
+          liff.login()
+        }
+      })
       await liff.init({ liffId: "2008199317-oRLk8Mvn" })
-      if (!liff.isLoggedIn()) {
-        liff.login({
-          scope: "profile openid email", // ตรงกับ permission PROFILE + OPENID_CONNECT + OC_EMAIL
-          redirectUri: location.href
-        });
-        return;
-      }
-      getEnvironment()
-      getUserProfile()
-      // getContext()
-      // getFriendship()
-      // createUniversalLink()
     }
     main()
   </script>
